@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\PERSONAL\\CARVAJAL\\NDCC_Carvajal_PT\\NDCC_Carvajal_PT.csproj": {}
+    "C:\\Users\\User\\Desktop\\PERSONAL\\CARVAJAL\\TestTecnico_Carvajal\\NDCC_Carvajal_PT\\NDCC_Carvajal_PT.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\PERSONAL\\CARVAJAL\\NDCC_Carvajal_PT\\NDCC_Carvajal_PT.csproj": {
+    "C:\\Users\\User\\Desktop\\PERSONAL\\CARVAJAL\\TestTecnico_Carvajal\\NDCC_Carvajal_PT\\NDCC_Carvajal_PT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\PERSONAL\\CARVAJAL\\NDCC_Carvajal_PT\\NDCC_Carvajal_PT.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\PERSONAL\\CARVAJAL\\TestTecnico_Carvajal\\NDCC_Carvajal_PT\\NDCC_Carvajal_PT.csproj",
         "projectName": "NDCC_Carvajal_PT",
-        "projectPath": "C:\\Users\\User\\Desktop\\PERSONAL\\CARVAJAL\\NDCC_Carvajal_PT\\NDCC_Carvajal_PT.csproj",
+        "projectPath": "C:\\Users\\User\\Desktop\\PERSONAL\\CARVAJAL\\TestTecnico_Carvajal\\NDCC_Carvajal_PT\\NDCC_Carvajal_PT.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\PERSONAL\\CARVAJAL\\NDCC_Carvajal_PT\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\PERSONAL\\CARVAJAL\\TestTecnico_Carvajal\\NDCC_Carvajal_PT\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,6 +53,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "System.Security.Cryptography.Algorithms": {
+              "target": "Package",
+              "version": "[4.3.1, )"
             }
           },
           "imports": [

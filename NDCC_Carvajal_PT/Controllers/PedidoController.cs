@@ -23,11 +23,23 @@ namespace NDCC_Carvajal_PT.Controllers
             return await context.Pedidos.ToListAsync();
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Pedido>> GetById(int id)
+        {
+            var exist = await context.Pedidos.AnyAsync(x => x.PedID == id);
+
+            if (!exist)
+                return NotFound();
+
+            var pedido = context.Pedidos.Find(id);
+
+            return Ok(pedido);
+        }
+
         [HttpPost]
         public async Task<ActionResult> Create(PedidoDto pedidoDto)
         {
             Pedido pedido = new Pedido() { 
-                PedID = pedidoDto.PedID, 
                 PedCant = pedidoDto.PedCant,
                 PedSubtot = pedidoDto.PedSubtot,
                 PedIVA = pedidoDto.PedIVA,
@@ -52,17 +64,17 @@ namespace NDCC_Carvajal_PT.Controllers
             return Ok();
         }
 
-        [HttpPut]
-        public async Task<ActionResult> Put(PedidoDto pedidoDto)
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(PedidoDto pedidoDto, int id)
         {
-            var exist = await context.Pedidos.AnyAsync(x => x.PedID == pedidoDto.PedID);
+            var exist = await context.Pedidos.AnyAsync(x => x.PedID == id);
 
             if (!exist)
                 return NotFound();
 
             Pedido pedido = new Pedido()
             {
-                PedID = pedidoDto.PedID,
+                PedID = id,
                 PedCant = pedidoDto.PedCant,
                 PedSubtot = pedidoDto.PedSubtot,
                 PedIVA = pedidoDto.PedIVA,

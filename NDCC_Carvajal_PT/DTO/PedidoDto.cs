@@ -2,7 +2,6 @@
 {
     public class PedidoDto
     {
-        public int PedID { get; set; }
         public int PedUsu { get; set; }
         public int PedPro { get; set; }
         public decimal PedVrUnit { get; set; }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NDCC_Carvajal_PT.DTO;
 using NDCC_Carvajal_PT.Models;
 
 namespace NDCC_Carvajal_PT.Controllers
@@ -22,21 +23,47 @@ namespace NDCC_Carvajal_PT.Controllers
             return await context.Productos.ToListAsync();
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Create(Producto producto)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Producto>> GetById(int id)
         {
+            var exist = await context.Productos.AnyAsync(x => x.ProID == id);
+
+            if (!exist)
+                return NotFound();
+
+            var usuario = context.Productos.Find(id);
+
+            return Ok(usuario);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(ProductoDto productoDto)
+        {
+            Producto producto = new Producto()
+            {
+                ProDesc = productoDto.ProDesc,
+                ProValor = productoDto.ProValor
+            };
+
             context.Add(producto);
             await context.SaveChangesAsync();
             return Ok();
         }
 
-        [HttpPut]
-        public async Task<ActionResult> Put(Producto producto)
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(ProductoDto productoDto, int id)
         {
-            var exist = await context.Productos.AnyAsync(x => x.ProID == producto.ProID);
+            var exist = await context.Productos.AnyAsync(x => x.ProID == id);
 
             if (!exist)
                 return NotFound();
+
+            Producto producto = new Producto()
+            {
+                ProID = id,
+                ProDesc = productoDto.ProDesc,
+                ProValor = productoDto.ProValor
+            };
 
             context.Update(producto);
             await context.SaveChangesAsync();
