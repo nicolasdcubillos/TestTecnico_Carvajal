@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NDCC_Carvajal_PT.DTO;
@@ -8,6 +9,7 @@ namespace NDCC_Carvajal_PT.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class PedidoController : ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -17,26 +19,13 @@ namespace NDCC_Carvajal_PT.Controllers
             this.context = context;
         }
 
-        [HttpGet]
+        [HttpGet("getAll")]
         public async Task<ActionResult<List<Pedido>>> Get()
         {
             return await context.Pedidos.ToListAsync();
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<Pedido>> GetById(int id)
-        {
-            var exist = await context.Pedidos.AnyAsync(x => x.PedID == id);
-
-            if (!exist)
-                return NotFound();
-
-            var pedido = context.Pedidos.Find(id);
-
-            return Ok(pedido);
-        }
-
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult> Create(PedidoDto pedidoDto)
         {
             Pedido pedido = new Pedido() { 
@@ -64,7 +53,7 @@ namespace NDCC_Carvajal_PT.Controllers
             return Ok();
         }
 
-        [HttpPut("{id:int}")]
+        [HttpPut("update/{id:int}")]
         public async Task<ActionResult> Put(PedidoDto pedidoDto, int id)
         {
             var exist = await context.Pedidos.AnyAsync(x => x.PedID == id);
@@ -89,7 +78,7 @@ namespace NDCC_Carvajal_PT.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("delete/{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
             var exist = await context.Pedidos.AnyAsync(x => x.PedID == id);

@@ -15,26 +15,26 @@ export class PedidoService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
-    })
+    }).set("Authorization", "Bearer " + localStorage.getItem('userToken'))
   }
   
   getAll(): Observable<any> {
-    return this.http.get(`${this.URL}`);
+    return this.http.get(`${this.URL}/getAll`, this.httpOptions);
   }
 
   create(Pedido: any): Observable<Pedido> {
-    return this.http.post<Pedido>(`${this.URL}` ,Pedido, this.httpOptions);
+    return this.http.post<Pedido>(`${this.URL}/create` ,Pedido, this.httpOptions);
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(`${this.URL}/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.URL}/delete/${id}`, this.httpOptions);
   }
 
   update(id: Number, Pedido: Pedido): Observable<Pedido> {
-  return this.http.put<Pedido>(`${this.URL}/` + id, Pedido, this.httpOptions);
+  return this.http.put<Pedido>(`${this.URL}/update/` + id, Pedido, this.httpOptions);
   }
 
   find(id: string): Observable<Pedido> {
-    return this.http.get<Pedido>(`${this.URL}` + id);
+    return this.http.get<Pedido>(`${this.URL}/getById` + id, this.httpOptions);
   }
 }

@@ -28,9 +28,10 @@ export class LoginComponent {
     this.authService.login(this.usuario).subscribe (
 
       response => {
+        response
         this.router.navigate(['productos']);
-        this.authService.login_successfull();
-        console.log(response);
+        this.authService.login_successfull(response);
+        console.log(response);  
       },
       error => {
         console.log('Ocurrió un error: ', error.error);

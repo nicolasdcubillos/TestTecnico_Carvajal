@@ -7,9 +7,8 @@ import { Usuario } from '../model/usuario.model';
   providedIn: 'root'
 })
 export class AuthService {
-  isLogged = false;
 
-  URL = 'https://localhost:7209'; 
+  URL = 'https://localhost:7209/Security'; 
 
   constructor( private http: HttpClient ) { }
 
@@ -20,18 +19,19 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return this.isLogged;
+    return (localStorage.getItem('userToken') != null)    
   }
 
   logout() {
-    this.isLogged = false;
+    localStorage.removeItem('userToken');
   }
   
-  login_successfull() {
-    this.isLogged = true;
+  login_successfull(token: string) {
+    localStorage.setItem('userToken', token);
   }
 
-  login(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.URL}/Security/login`, usuario);
+  login(usuario: Usuario): Observable<any> {
+    return this.http.post<Usuario>(`${this.URL}/login`, usuario, {
+      responseType: 'text' as 'json'});
   }
 }

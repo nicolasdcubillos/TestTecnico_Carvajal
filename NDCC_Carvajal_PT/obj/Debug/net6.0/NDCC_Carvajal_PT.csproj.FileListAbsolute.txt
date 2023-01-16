@@ -162,3 +162,4 @@ C:\Users\User\Desktop\PERSONAL\CARVAJAL\TestTecnico_Carvajal\NDCC_Carvajal_PT\ob
 C:\Users\User\Desktop\PERSONAL\CARVAJAL\TestTecnico_Carvajal\NDCC_Carvajal_PT\obj\Debug\net6.0\NDCC_Carvajal_PT.pdb
 C:\Users\User\Desktop\PERSONAL\CARVAJAL\TestTecnico_Carvajal\NDCC_Carvajal_PT\obj\Debug\net6.0\NDCC_Carvajal_PT.genruntimeconfig.cache
 C:\Users\User\Desktop\PERSONAL\CARVAJAL\TestTecnico_Carvajal\NDCC_Carvajal_PT\obj\Debug\net6.0\ref\NDCC_Carvajal_PT.dll
+C:\Users\User\Desktop\PERSONAL\CARVAJAL\TestTecnico_Carvajal\NDCC_Carvajal_PT\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -15,26 +15,26 @@ export class ProductoService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
-    })
+    }).set("Authorization", "Bearer " + localStorage.getItem('userToken'))
   }
   
   getAll(): Observable<any> {
-    return this.http.get(`${this.URL}`);
+    return this.http.get(`${this.URL}/getAll`, this.httpOptions);
   }
 
   create(producto: any): Observable<Producto> {
-    return this.http.post<Producto>(`${this.URL}` , producto, this.httpOptions);
+    return this.http.post<Producto>(`${this.URL}/create` , producto, this.httpOptions);
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(`${this.URL}/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.URL}/delete/${id}`, this.httpOptions);
   }
 
   update(id: Number, Producto: Producto): Observable<Producto> {
-  return this.http.put<Producto>(`${this.URL}/` + id, Producto, this.httpOptions);
+  return this.http.put<Producto>(`${this.URL}/update/` + id, Producto, this.httpOptions);
   }
 
   find(id: string): Observable<Producto> {
-    return this.http.get<Producto>(`${this.URL}` + id);
+    return this.http.get<Producto>(`${this.URL}/getById` + id, this.httpOptions);
   }
 }

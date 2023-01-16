@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NDCC_Carvajal_PT.DTO;
@@ -8,6 +9,7 @@ namespace NDCC_Carvajal_PT.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductoController : ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -17,13 +19,13 @@ namespace NDCC_Carvajal_PT.Controllers
             this.context = context;
         }
 
-        [HttpGet]
+        [HttpGet("getAll")]
         public async Task<ActionResult<List<Producto>>> Get()
         {
             return await context.Productos.ToListAsync();
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("getById/{id:int}")]
         public async Task<ActionResult<Producto>> GetById(int id)
         {
             var exist = await context.Productos.AnyAsync(x => x.ProID == id);
@@ -36,7 +38,7 @@ namespace NDCC_Carvajal_PT.Controllers
             return Ok(usuario);
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult> Create(ProductoDto productoDto)
         {
             Producto producto = new Producto()
@@ -50,7 +52,7 @@ namespace NDCC_Carvajal_PT.Controllers
             return Ok();
         }
 
-        [HttpPut("{id:int}")]
+        [HttpPut("update/{id:int}")]
         public async Task<ActionResult> Put(ProductoDto productoDto, int id)
         {
             var exist = await context.Productos.AnyAsync(x => x.ProID == id);
@@ -70,7 +72,7 @@ namespace NDCC_Carvajal_PT.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("delete/{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
             var exist = await context.Productos.AnyAsync(x => x.ProID == id);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NDCC_Carvajal_PT.DTO;
@@ -8,6 +9,7 @@ using NDCC_Carvajal_PT.Utils;
 namespace NDCC_Carvajal_PT.Controllers
 {
     [Route("[controller]")]
+    [Authorize]
     [ApiController]
     public class UsuarioController : ControllerBase
     {
@@ -18,13 +20,13 @@ namespace NDCC_Carvajal_PT.Controllers
             this.context = context;
         }
 
-        [HttpGet]
+        [HttpGet("getAll")]
         public async Task<ActionResult<List<Usuario>>> Get()
         {
             return await context.Usuarios.ToListAsync();
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("getById/{id:int}")]
         public async Task<ActionResult<Usuario>> GetById(int id)
         {
             var exist = await context.Usuarios.AnyAsync(x => x.UsuID == id);
@@ -37,7 +39,7 @@ namespace NDCC_Carvajal_PT.Controllers
             return Ok(usuario);
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult> Create(UsuarioDto usuarioDto)
         {
             var exist = await context.Usuarios.AnyAsync(x => x.UsuNombre == usuarioDto.UsuNombre);
@@ -56,7 +58,7 @@ namespace NDCC_Carvajal_PT.Controllers
             return Ok();
         }
 
-        [HttpPut("{id:int}")]
+        [HttpPut("update/{id:int}")]
         public async Task<ActionResult> Put(UsuarioDto usuarioDto, int id)
         {
             var exist = await context.Usuarios.AnyAsync(x => x.UsuID == id);
@@ -76,7 +78,7 @@ namespace NDCC_Carvajal_PT.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("delete/{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
             var exist = await context.Usuarios.AnyAsync(x => x.UsuID == id);
