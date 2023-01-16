@@ -1,5 +1,5 @@
 export class Usuario {
-    UsuID: Number = -1;
-    UsuNombre: String = "";
-    UsuPass: String = "";
+    usuID: number = 0;
+    usuNombre: String = "";
+    usuPass: String = "";
 }

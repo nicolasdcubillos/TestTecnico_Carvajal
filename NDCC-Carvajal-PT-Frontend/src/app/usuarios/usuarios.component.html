@@ -1,1 +1,90 @@
-<p>usuarios works!</p>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<div class="container">
+
+    <form [formGroup]="form" (ngSubmit)="update()">
+    <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Contraseña</th>
+          <th>
+            <button
+              type="button"
+              title="Add New User"
+              class="btn btn-primary"
+              (click)="addUser()"
+            >
+              <i class="bi bi-plus"></i>
+            </button>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <ng-container *ngFor="let user of usuarios; let i = index">
+          <tr
+                  *ngIf="userSelected != user"
+                  (click)="selectUser(user)"
+              >
+            <td>{{ user.usuID }}</td>
+            <td>{{ user.usuNombre }}</td>
+            <td class="hidetext">{{ user.usuPass }}</td>
+            <td>
+              <button
+                class="btn btn-danger btn-sm mx-1"
+                title="Delete User"
+                type="button"
+                (click)="deleteUser(user.usuID)"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+      
+              <tr *ngIf="userSelected == user" class="table-primary">
+                
+              <td>{{ user.usuID }}</td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="nombre"
+                [value]="user.usuNombre"
+                title="Nombre"
+                />
+            </td>
+            <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="contrasena"
+                  [value]="user.usuPass"
+                  title="Contraseña"
+                  />
+              </td>
+            <td>             
+              <button
+                  class="btn btn-primary btn-sm mx-1"
+                  title="update"
+                  type="submit"
+                  [disabled]="form.invalid"
+                >
+                  <i class="bi bi-lightning"></i>
+                </button>
+      
+                <button
+                  class="btn btn-danger btn-sm mx-1"
+                  title="Cancel Changes"
+                  type="button"
+                >
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+    </form>
+</div>

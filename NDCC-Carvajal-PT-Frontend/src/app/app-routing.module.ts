@@ -12,9 +12,6 @@ const routes: Routes = [
     path: 'productos', component: ProductosComponent, canActivate : [AuthGuard]
   },
   {
-    path: 'menu-principal', component: MenuPrincipalComponent, canActivate : [AuthGuard]
-  },
-  {
     path: 'login', component: LoginComponent
   },
   {
@@ -25,6 +22,9 @@ const routes: Routes = [
   },
   {
     path: 'pedidos', component: PedidosComponent, canActivate : [AuthGuard]
+  },
+  {
+    path: '', redirectTo: 'login', pathMatch: 'full'
   }
 ];
 

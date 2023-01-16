@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Usuario } from './model/usuario.model';
+import { Usuario } from '../model/usuario.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
   
-  URL = 'https://localhost:7209'; 
+  URL = 'https://localhost:7209/usuario'; 
   constructor( private http: HttpClient ) { }
 
   httpOptions = {
@@ -17,20 +17,20 @@ export class UsuarioService {
     })
   }
   
-  getAllEmployee(): Observable<any> {
+  getAll(): Observable<any> {
     return this.http.get(`${this.URL}`);
   }
 
-  create(employee: any): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.URL}` , employee, this.httpOptions);
+  create(usuario: any): Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.URL}` , usuario, this.httpOptions);
   }
 
-  deleteEmployee(id: number): Observable<any> {
+  delete(id: number): Observable<any> {
     return this.http.delete(`${this.URL}/${id}`, { responseType: 'text' });
   }
 
-  update(id: string, employee: any): Observable<Usuario> {
-  return this.http.put<Usuario>(`${this.URL}` + id, employee, this.httpOptions);
+  update(id: Number, usuario: Usuario): Observable<Usuario> {
+  return this.http.put<Usuario>(`${this.URL}/` + id, usuario, this.httpOptions);
   }
 
   find(id: string): Observable<Usuario> {

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../services/auth.service';
 import { Usuario } from '../model/usuario.model';
-import { UsuarioService } from '../usuario.service';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'login',
@@ -20,9 +20,7 @@ export class LoginComponent {
   }
 
   ngOnInit() {
-    console.log('iniciado');
-    console.log('iniciado');
-    console.log('iniciado');
+    
   }
   
   authenticate() {
@@ -30,7 +28,7 @@ export class LoginComponent {
     this.authService.login(this.usuario).subscribe (
 
       response => {
-        this.router.navigate(['menu-principal']);
+        this.router.navigate(['productos']);
         this.authService.login_successfull();
         console.log(response);
       },

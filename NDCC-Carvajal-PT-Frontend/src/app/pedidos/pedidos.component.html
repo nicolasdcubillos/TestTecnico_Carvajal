@@ -1,1 +1,158 @@
-<p>pedidos works!</p>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<div class="container">
+
+    <form [formGroup]="form" (ngSubmit)="update()">
+    <table class="table table-bordered jumbotron">
+        <thead class = "thead-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Usuario</th>
+          <th scope="col">Productos</th>
+          <th scope="col">Vr unitario.</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Subtotal</th>
+          <th scope="col">IVA</th>
+          <th scope="col">Total</th>
+          <th>
+            <button
+              type="button"
+              title="Add New pedido"
+              class="btn btn-primary"
+              (click)="addPedido()"
+            >
+              <i class="bi bi-plus"></i>
+            </button>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <ng-container *ngFor="let pedido of Pedidos; let i = index">
+          <tr
+                  *ngIf="pedidoSelected != pedido"
+                  (click)="selectpedido(pedido)"
+              >
+            <td>{{ pedido.pedID }}</td>
+            <td>{{ pedido.pedUsu }}</td>
+            <td>{{ pedido.pedPro }}</td>
+            <td>{{ pedido.pedVrUnit }}</td>
+            <td>{{ pedido.pedCant }}</td>
+            <td>{{ pedido.pedSubtot }}</td>
+            <td>{{ pedido.pedIVA }}</td>
+            <td>{{ pedido.pedTotal }}</td>
+            <td>
+              <button
+                class="btn btn-danger btn-sm mx-1"
+                title="Delete pedido"
+                type="button"
+                (click)="deletePedido(pedido.pedID)"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+      
+              <tr *ngIf="pedidoSelected == pedido">
+                <td>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="id"
+                    [value]="pedido.pedID"
+                    title="Usuario"
+                    />
+                </td>
+                <td>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="usu"
+                [value]="pedido.pedUsu"
+                title="Usuario"
+                />
+            </td>
+            <td>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="pro"
+                  [value]="pedido.pedPro"
+                  title="Producto"
+                  />
+              </td>
+            <td>            
+            <td>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="vrUnit"
+                  [value]="pedido.pedVrUnit"
+                  title="V"
+                  />
+              </td>
+            <td>
+            <td>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="cant"
+                  [value]="pedido.pedCant"
+                  title="Cantid"
+                  />
+              </td>
+            <td>
+            <td>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="subtot"
+                  [value]="pedido.pedSubtot"
+                  title="Subto"
+                  />
+              </td>
+            <td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="iva"
+                  [value]="pedido.pedIVA"
+                  title="IVA"
+                  />
+              </td>
+            <td>
+            <td>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="total"
+                  [value]="pedido.pedTotal"
+                  title="Total"
+                  />
+              </td>
+            <td>         
+              <button
+                  class="btn btn-primary btn-sm mx-1"
+                  title="update"
+                  type="submit"
+                  [disabled]="form.invalid"
+                >
+                  <i class="bi bi-lightning"></i>
+                </button>
+      
+                <button
+                  class="btn btn-danger btn-sm mx-1"
+                  title="Cancel Changes"
+                  type="button"
+                  (click)="cancel()"
+                >
+                  <i class="bi bi-x-lg"></i>
+                </button>
+              </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+    </form>
+</div>

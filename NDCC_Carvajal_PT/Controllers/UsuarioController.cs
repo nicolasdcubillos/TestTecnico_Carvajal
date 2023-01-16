@@ -66,6 +66,7 @@ namespace NDCC_Carvajal_PT.Controllers
 
             Usuario usuario = new Usuario()
             {
+                UsuID = id,
                 UsuNombre = usuarioDto.UsuNombre,
                 UsuPass = Cifrador.encriptar(usuarioDto.UsuPass)
             };
