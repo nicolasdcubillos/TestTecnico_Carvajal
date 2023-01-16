@@ -8,7 +8,7 @@ GO
 CREATE TABLE Usuarios (
     UsuID int IDENTITY(1, 1) PRIMARY KEY,
     UsuNombre varchar(50),
-    UsuPass varchar(20)
+    UsuPass varchar(256)
 );
 
 CREATE TABLE Productos (
@@ -26,9 +26,7 @@ CREATE TABLE Pedidos (
 	PedSubtot money,
 	PedIVA float,
 	PedTotal money
-);
+);	
 
 SET IDENTITY_INSERT Usuarios ON;
-
-SELECT * FROM PEDIDOS;
 

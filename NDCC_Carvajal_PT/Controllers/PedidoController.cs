@@ -22,7 +22,7 @@ namespace NDCC_Carvajal_PT.Controllers
         [HttpGet("getAll")]
         public async Task<ActionResult<List<Pedido>>> Get()
         {
-            return await context.Pedidos.ToListAsync();
+            return await context.Pedidos.Include(p => p.usuario).Include(p => p.producto).ToListAsync();
         }
 
         [HttpPost("create")]

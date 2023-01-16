@@ -12,11 +12,26 @@ namespace NDCC_Carvajal_PT
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Add the shadow property to the model
-            //modelBuilder.Entity<Pedido>()
-            //.Property<int>("PedUsu");
 
-            // Use the shadow property as a foreign key
+             modelBuilder.Entity<Usuario>()
+            .HasKey(b => b.UsuID);
+
+            modelBuilder.Entity<Producto>()
+            .HasKey(b => b.ProID);
+
+             modelBuilder.Entity<Pedido>()
+            .HasKey(b => b.PedID);
+
+            modelBuilder.Entity<Pedido>()
+            .HasOne<Usuario>(p => p.usuario)
+            .WithMany()
+            .HasForeignKey(p => p.PedUsu);
+
+
+            modelBuilder.Entity<Pedido>()
+            .HasOne<Producto>(p => p.producto)
+            .WithMany()
+            .HasForeignKey(p => p.PedPro);
         }
     }
 }
