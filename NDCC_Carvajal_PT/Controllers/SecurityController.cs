@@ -24,7 +24,7 @@ namespace NDCC_Carvajal_PT.Controllers
             var exist = await context.Usuarios.AnyAsync(x => x.UsuNombre == usuarioDto.UsuNombre);
 
             if (!exist)
-                return NotFound();
+                return BadRequest("Usuario no existente.");
 
             var usuario = context.Usuarios
                     .Where(u => u.UsuNombre == usuarioDto.UsuNombre)
